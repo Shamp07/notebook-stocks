@@ -1,8 +1,13 @@
+import Layout from '@/components/Layout'
+import Provider from '@/components/Provider'
+
 function App() {
   return (
-    <div>
-      Welcome Back!
-    </div>
+    <Provider>
+      <Layout>
+        Welcome Back!
+      </Layout>
+    </Provider>
   )
 }
 
