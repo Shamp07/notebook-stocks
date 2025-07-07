@@ -1,12 +1,11 @@
 import { createTheme } from '@mui/material'
-import { fontFamily } from '@/constants/font.ts'
+import { fontFamily } from '../constants/font.ts'
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#E0C2FF',
-      light: '#F5EBFF',
-      contrastText: '#47008F',
+      main: '#D0CEC1',
+      contrastText: '#2B2118',
     },
   },
   typography: {

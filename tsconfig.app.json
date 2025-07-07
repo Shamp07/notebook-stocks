@@ -26,8 +26,8 @@
     /* Path Alias */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["app/*"]
     }
   },
-  "include": ["src"]
+  "include": ["app"]
 }
