@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material'
-import { fontFamily } from '../constants/font.ts'
+import { fontFamily } from '~/constants/font'
 
 const theme = createTheme({
   palette: {

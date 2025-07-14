@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router'
-import AppLayout from './components/Layout'
-import Provider from './components/Provider'
+import AppLayout from '~/components/Layout'
+import Provider from '~/components/Provider'
 
 function Layout() {
   return (

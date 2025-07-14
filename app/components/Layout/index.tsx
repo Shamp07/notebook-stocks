@@ -1,15 +1,15 @@
 import type { ReactNode } from 'react'
+import { styled } from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline'
 import RawContainer from '@mui/material/Container'
 import { css } from '@mui/material/styles'
 import { Global } from '@emotion/react'
 
 import Header from './Header'
-import { styled } from '@mui/material'
 
 const globalStyles = css`
   body {
-    background-image: url("../../../public/textured-paper.jpg");
+    background-image: url("textured-paper.jpg");
     color: #2e3032;
     font-feature-settings: "ss05"
   }

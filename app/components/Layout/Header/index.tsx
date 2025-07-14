@@ -1,4 +1,5 @@
 import { type MouseEvent, useState } from 'react'
+import { Link } from 'react-router'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -9,10 +10,10 @@ import MenuIcon from '@mui/icons-material/Menu'
 import Container from '@mui/material/Container'
 import Button from '@mui/material/Button'
 import MenuItem from '@mui/material/MenuItem'
-import StockIcon from '../../../assets/icons/stock.svg?react'
 import { Icon, styled } from '@mui/material'
 import { css } from '@mui/material/styles'
-import { Link } from 'react-router'
+
+import StockIcon from '~/assets/icons/stock.svg?react'
 
 const TitleBox = styled(Box)`
   display: flex;
