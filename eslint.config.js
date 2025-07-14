@@ -26,6 +26,26 @@ export default tseslint.config([
       reactRefresh.configs.vite,
       stylistic.configs.recommended
     ],
+    rules: {
+      "react-refresh/only-export-components": [
+        "warn",
+        {
+          allowExportNames: [
+            "loader",
+            "clientLoader",
+            "action",
+            "clientAction",
+            "ErrorBoundary",
+            "HydrateFallback",
+            "headers",
+            "handle",
+            "links",
+            "meta",
+            "shouldRevalidate",
+          ],
+        },
+      ],
+    },
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
