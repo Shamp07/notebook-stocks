@@ -5,7 +5,6 @@ import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
-import Menu from '@mui/material/Menu'
 import MenuIcon from '@mui/icons-material/Menu'
 import Container from '@mui/material/Container'
 import Button from '@mui/material/Button'
@@ -14,33 +13,54 @@ import { Icon, styled } from '@mui/material'
 import { css } from '@mui/material/styles'
 
 import StockIcon from '~/assets/icons/stock.svg?react'
+import route from '~/constants/route'
+import { generateDisplayStyle } from '~/utils/style'
+import NoteMenu from '~/components/NoteMenu'
 
-const TitleBox = styled(Box)`
+const InnerBox = styled(Box)`
   display: flex;
   align-items: center;
-  
+
   ${({ theme }) => css`
-    ${theme.breakpoints.up('md')} {
-      text-align: right;
+    ${theme.breakpoints.down('md')} {
+      flex-grow: 1;
     }
   `}
 `
 
 const Title = styled(Link)`
+  display: flex;
+  align-items: center;
   font-size: 1.5rem;
   font-weight: 700;
   color: inherit;
   text-decoration: none;
+  margin-right: 16px;
   
   ${({ theme }) => css`
-    ${theme.breakpoints.up('md')} {
-      text-align: right;
+    ${theme.breakpoints.down('md')} {
+      margin-right: auto;
+      font-size: 1.2rem;
     }
   `}
 `
 
+const MenuBox = styled(Box)`
+  ${({ theme }) => generateDisplayStyle(theme, 'down', 'md')}
+`
+
+const PageBox = styled(Box)`
+  ${({ theme }) => generateDisplayStyle(theme, 'up', 'md')}
+`
+
 const TitleIcon = styled(StockIcon)`
   margin-right: 8px;
+`
+
+const PageButton = styled(Button)`
+  margin: 8px 0;
+  color: #2B2118;
+  display: block;
 `
 
 const pages = ['🔥 인기 주식', '📓 내 공책']
@@ -56,71 +76,43 @@ function Header() {
     setAnchorElNav(null)
   }
 
+  const pageButtons = pages.map(page => (
+    <PageButton
+      key={page}
+      size="large"
+      onClick={handleCloseNavMenu}
+    >
+      {page}
+    </PageButton>
+  ))
+
+  const menuItems = pages.map(page => (
+    <MenuItem key={page} onClick={handleCloseNavMenu}>
+      <Typography variant="body1">{page}</Typography>
+    </MenuItem>
+  ))
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <TitleBox sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <Icon
-              fontSize="large"
-              component={TitleIcon}
-            />
-            <Title to="/">
-              공책 주식
-            </Title>
-          </TitleBox>
-
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontWeight: 700,
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            공책 주식
-          </Typography>
-          <Box sx={{ display: { xs: 'flex', md: 'none', alignItems: 'center', justifyContent: 'space-between', width: '100%' } }}>
-            <Box sx={{ display: { xs: 'flex', alignItems: 'center' } }}>
+          <InnerBox>
+            <Title to={route.home}>
               <Icon
                 fontSize="large"
-                component={StockIcon}
-                sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}
+                component={TitleIcon}
               />
-              <Typography
-                variant="h5"
-                noWrap
-                component="a"
-                href="#app-bar-with-responsive-menu"
-                sx={{
-                  mr: 2,
-                  display: { xs: 'flex', md: 'none' },
-                  fontWeight: 700,
-                  color: 'inherit',
-                  textDecoration: 'none',
-                }}
-              >
-                공책 주식
-              </Typography>
-            </Box>
-
-            <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+              공책 주식
+            </Title>
+            <MenuBox>
               <IconButton
                 size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
                 onClick={handleOpenNavMenu}
                 color="inherit"
               >
                 <MenuIcon />
               </IconButton>
-              <Menu
-                id="menu-appbar"
+              <NoteMenu
                 anchorEl={anchorElNav}
                 anchorOrigin={{
                   vertical: 'bottom',
@@ -133,28 +125,14 @@ function Header() {
                 }}
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
-                sx={{ display: { xs: 'block', md: 'none' } }}
               >
-                {pages.map(page => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-          </Box>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map(page => (
-              <Button
-                key={page}
-                size="large"
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: '#2B2118', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
+                {menuItems}
+              </NoteMenu>
+            </MenuBox>
+          </InnerBox>
+          <PageBox>
+            {pageButtons}
+          </PageBox>
         </Toolbar>
       </Container>
     </AppBar>
