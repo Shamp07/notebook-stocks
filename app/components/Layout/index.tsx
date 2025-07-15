@@ -13,6 +13,11 @@ const globalStyles = css`
     color: #2e3032;
     font-feature-settings: "ss05"
   }
+  
+  a {
+    color: inherit;
+    text-decoration: inherit;
+  }
 `
 
 const Container = styled(RawContainer)`
