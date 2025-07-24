@@ -11,6 +11,8 @@ import type { Route } from './+types/root'
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://cdn.jsdelivr.net' },
+  { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+  { rel: 'preconnect', href: 'https://fonts.gstatic.com' },
   {
     rel: 'preload',
     as: 'style',
@@ -19,6 +21,10 @@ export const links: Route.LinksFunction = () => [
   {
     rel: 'stylesheet',
     href: 'https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css',
+  },
+  {
+    rel: 'stylesheet',
+    href: 'https://fonts.googleapis.com/css2?family=Single+Day&display=swap&text=공책주식',
   },
 ]
 

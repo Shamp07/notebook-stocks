@@ -11,12 +11,13 @@ const globalStyles = css`
   body {
     background-image: url("textured-paper.jpg");
     color: #2e3032;
-    font-feature-settings: "ss05"
+    font-feature-settings: "ss05";
   }
   
   a {
     color: inherit;
     text-decoration: inherit;
+    -webkit-tap-highlight-color: transparent;
   }
 `
 

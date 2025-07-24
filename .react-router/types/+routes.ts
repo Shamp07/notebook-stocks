@@ -13,16 +13,37 @@ type Pages = {
   "/": {
     params: {};
   };
+  "/portfolio": {
+    params: {};
+  };
+  "/popular": {
+    params: {};
+  };
+  "/ranking": {
+    params: {};
+  };
 };
 
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/";
+    page: "/" | "/portfolio" | "/popular" | "/ranking";
   };
   "./layout.tsx": {
     id: "layout";
-    page: "/";
+    page: "/portfolio" | "/popular" | "/ranking" | "/";
+  };
+  "routes/portfolio.tsx": {
+    id: "routes/portfolio";
+    page: "/portfolio";
+  };
+  "routes/popular.tsx": {
+    id: "routes/popular";
+    page: "/popular";
+  };
+  "routes/ranking.tsx": {
+    id: "routes/ranking";
+    page: "/ranking";
   };
   "routes/_index.tsx": {
     id: "routes/_index";

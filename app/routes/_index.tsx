@@ -71,7 +71,6 @@ const Title = styled('h1')`
 
 const Description = styled('h3')`
   text-align: center;
-  font-family: Inter, sans-serif;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
@@ -98,7 +97,6 @@ const StartLink = styled(Link)`
   gap: 8px;
   border-radius: 8px;
   color: #fff;
-  font-family: Inter, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -110,11 +108,13 @@ const StartLink = styled(Link)`
   background: radial-gradient(141.42% 141.42% at 100% 0%, #fff6, #fff0),
     radial-gradient(140.35% 140.35% at 100% 94.74%, #2e3032, #2e303200),
     radial-gradient(89.94% 89.94% at 18.42% 15.79%, #2B2118, #2B211800);
-  box-shadow: 0 1px #ffffffbf inset;
   cursor: pointer;
   
   &:hover {
     transform: translate3d(0, -2px, 0);
+    background: radial-gradient(141.42% 141.42% at 100% 0%, #ffffff80, #fff0),
+      radial-gradient(140.35% 140.35% at 100% 94.74%, #2e3032, #2e303200),
+      radial-gradient(89.94% 89.94% at 18.42% 15.79%, #2B2118, #2B211800);
   }
 `
 
@@ -136,6 +136,7 @@ const RepositoryLink = styled(Link)`
 
   &:hover {
     transform: translate3d(0, -2px, 0);
+    border-color: rgb(43, 33, 24, .3);
   }
 `
 
@@ -167,7 +168,7 @@ export default function Home() {
         <b>공책 주식</b>
         은 주식 거래의 연습을 위한 강력하고 재미있는 도구입니다.
         <br />
-        현실에서는 개미였던 내가 공책 위에서는 주식 시장 거물?!
+        현실에서는 개미였던 내가 공책 위에서는 주식&nbsp;시장 거물?!
       </Description>
       <Actions>
         <StartLink to={route.home}>

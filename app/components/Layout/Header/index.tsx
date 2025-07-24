@@ -1,5 +1,5 @@
-import { type MouseEvent, useState } from 'react'
-import { Link } from 'react-router'
+import { useState } from 'react'
+import { Link, NavLink } from 'react-router'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -7,15 +7,14 @@ import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import MenuIcon from '@mui/icons-material/Menu'
 import Container from '@mui/material/Container'
-import Button from '@mui/material/Button'
-import MenuItem from '@mui/material/MenuItem'
 import { Icon, styled } from '@mui/material'
 import { css } from '@mui/material/styles'
 
 import StockIcon from '~/assets/icons/stock.svg?react'
 import route from '~/constants/route'
 import { generateDisplayStyle } from '~/utils/style'
-import NoteMenu from '~/components/NoteMenu'
+import { fontFamily } from '~/constants/font'
+import Drawer from '~/components/Layout/Header/Drawer'
 
 const InnerBox = styled(Box)`
   display: flex;
@@ -35,7 +34,12 @@ const Title = styled(Link)`
   font-weight: 700;
   color: inherit;
   text-decoration: none;
-  margin-right: 16px;
+  margin-right: 24px;
+  font-family: ${fontFamily.singleday};
+  
+  &:hover {
+    color: black;
+  }
   
   ${({ theme }) => css`
     ${theme.breakpoints.down('md')} {
@@ -47,9 +51,16 @@ const Title = styled(Link)`
 
 const MenuBox = styled(Box)`
   ${({ theme }) => generateDisplayStyle(theme, 'down', 'md')}
+
+  & .MuiTouchRipple-root, & .MuiTouchRipple-child {
+    border-radius: 6px;
+  }
 `
 
 const PageBox = styled(Box)`
+  display: flex;
+  gap: 24px;
+  
   ${({ theme }) => generateDisplayStyle(theme, 'up', 'md')}
 `
 
@@ -57,39 +68,66 @@ const TitleIcon = styled(StockIcon)`
   margin-right: 8px;
 `
 
-const PageButton = styled(Button)`
+const PageLink = styled(NavLink)`
   margin: 8px 0;
-  color: #2B2118;
-  display: block;
+  color: #2b2118cc;
+  font-weight: 700;
+  transition-property: all;
+  transition-duration: .2s;
+  
+  &:hover {
+    color: #2b2118;
+  }
+  
+  &.active {
+    color: #2b2118;
+  }
+
+  &.active > span {
+    width: 100%;
+    background: #2b2118;
+  }
 `
 
-const pages = ['🔥 인기 주식', '📓 내 공책']
+const UnderBar = styled('span')`
+  display: block;
+  width: 0;
+  height: .125rem;
+  transition-property: all;
+  transition-duration: .2s;
+`
+
+const pages = [{
+  name: '인기 주식',
+  path: route.popular,
+}, {
+  name: '포트폴리오',
+  path: route.portfolio,
+}, {
+  name: '랭킹',
+  path: route.ranking,
+}]
 
 function Header() {
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
+  const [open, setOpen] = useState(false)
 
-  const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget)
+  const toggleDrawer = (newOpen: boolean) => () => {
+    setOpen(newOpen)
   }
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null)
-  }
-
-  const pageButtons = pages.map(page => (
-    <PageButton
-      key={page}
-      size="large"
-      onClick={handleCloseNavMenu}
+  const pageLinks = pages.map(({ name, path }) => (
+    <PageLink
+      to={path}
+      key={path}
     >
-      {page}
-    </PageButton>
-  ))
-
-  const menuItems = pages.map(page => (
-    <MenuItem key={page} onClick={handleCloseNavMenu}>
-      <Typography variant="body1">{page}</Typography>
-    </MenuItem>
+      <Typography
+        variant="body2"
+        fontWeight="medium"
+      >
+        {name}
+      </Typography>
+      <UnderBar />
+    </PageLink>
   ))
 
   return (
@@ -107,31 +145,20 @@ function Header() {
             <MenuBox>
               <IconButton
                 size="large"
-                onClick={handleOpenNavMenu}
+                onClick={toggleDrawer(true)}
                 color="inherit"
               >
                 <MenuIcon />
               </IconButton>
-              <NoteMenu
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-              >
-                {menuItems}
-              </NoteMenu>
+              <Drawer
+                open={open}
+                onClose={toggleDrawer(false)}
+                anchor="right"
+              />
             </MenuBox>
           </InnerBox>
           <PageBox>
-            {pageButtons}
+            {pageLinks}
           </PageBox>
         </Toolbar>
       </Container>
